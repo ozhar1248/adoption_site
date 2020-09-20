@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Register User</title>
+        <h:outputStylesheet library="css" name="global.css" />
+    </h:head>
+    <h:body>
+        <div class="header">
+            Register
+        </div>
+        <h:form>
+            <h:commandButton  value="Back" action="#{user.submitBack()}" styleClass="button"/>
+        </h:form>
+        
+        <h:form enctype="multipart/form-data">
+            <h:panelGrid columns="3" cellspacing="40">
+                
+                <h:outputText class="form_label" value ="First Name: "/>
+                <h:inputText id="FirstName" class="input_text" required ="true" requiredMessage="Please fill first name"
+                             value = "#{user.firstName}" >
+                <f:validateLength maximum="50"/>
+                </h:inputText>
+                <h:message class="error_mess" for="FirstName"/>
+                
+                <h:outputText class="form_label" value ="Last Name: "/>
+                <h:inputText id="LastName" class="input_text" required ="true" requiredMessage="Please fill last name"
+                             value = "#{user.lastName}">
+                <f:validateLength maximum="50"/>
+                </h:inputText>
+                <h:message class="error_mess" for="LastName" />
+                
+                <h:outputText class="form_label" value ="Email: "/>
+                <h:inputText id="Email" class="input_text" required ="true" requiredMessage="Please fill your e-mail"
+                             value = "#{user.email}" validator="#{validators.validateEmail}">
+                <f:validateLength maximum="100"/>
+                </h:inputText>
+                <h:message class="error_mess" for="Email" />
+                
+                <h:outputText class="form_label" value ="Password (4-16 length): "/>
+                <h:inputSecret id="Password" class="input_text" required ="true" requiredMessage="Please fill Password between 4-16 characters"
+                             value = "#{user.password}" >
+                <f:validateLength maximum="16" minimum="4"/>
+                </h:inputSecret>
+                <h:message class="error_mess" for="Password" />
+                
+                <h:outputText class="form_label" value ="Confirm Password: "/>
+                <h:inputSecret id="PasswordConfirm" class="input_text" required ="true" requiredMessage="Please confirm Password"
+                               value = "#{user.passwordConfirm}" validator="#{validators.validateConfirmPassword}"/>
+                <h:message class="error_mess" for="PasswordConfirm"/>
+                
+                <h:outputText class="form_label" value ="About yourself: "/>
+                <h:inputText id="AboutMe" class="input_text" value = "#{user.aboutMe}" >
+                <f:validateLength maximum="200"/>
+                </h:inputText>
+                <h:message class="error_mess" for="Address"/>
+                
+                <h:outputText class="form_label" value ="Phone number 1 (Israel): "/>
+                <h:inputText id="Phone1" class="input_text" value = "#{user.telephone1}" 
+                             validator = "#{validators.validatePhone}">
+                <f:validateLength maximum="11"/>
+                </h:inputText>
+                <h:message class="error_mess" for="Phone1"/>
+                
+                <h:outputText class="form_label" value ="Phone number 2 (Israel): "/>
+                <h:inputText id="Phone2" class="input_text" value = "#{user.telephone2}" 
+                             validator = "#{validators.validatePhone}">
+                <f:validateLength maximum="11"/>
+                </h:inputText>
+                <h:message class="error_mess" for="Phone2"/>
+
+                <h:commandButton  value="submit and upload images" action="#{user.submit}" styleClass="button"/>
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>
+

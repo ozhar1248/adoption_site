@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Change Details</title>
+        <h:outputStylesheet library="css" name="global.css" />
+    </h:head>
+    <h:body>
+        <div class="header"> Change Details</div>
+        
+        <h:form>
+            <div>
+                <h:outputLabel value="Select your pet's name: " class="form_label" style="margin-right: 8%" />
+                <h:selectOneMenu id="selectAnimal" value="#{animalForUpdate.userChoise}" class="input_text" required="true"
+                                 requiredMessage="Please choose" >
+                    <f:ajax execute="selectAnimal" 
+                            render="name_update age_update weight_update city_update relevant_update short_update long_update contact1_update contact2_update contact3_update" />
+                    <f:selectItems value="#{animalForUpdate.listAnimals()}"/>
+                </h:selectOneMenu>
+                <h:message for="selectAnimal" class="error_mess"/>
+            </div>
+            <div>
+                <h:selectOneRadio required="true" value="#{animalForUpdate.relevantChoice}" id="relevant_update"
+                                  style="font-size: 40px; font-family: 'Ubuntu', sans-serif;" >
+                    <f:selectItems value="#{animalForUpdate.relevantOptions}"/>
+                </h:selectOneRadio>
+            </div>
+            
+            <h:panelGrid columns="3" columnClasses="form_label, input_text, error_mess" cellspacing="30">
+                
+            <h:outputLabel value="Name: "/>
+            <h:inputText value="#{animalForUpdate.name}" id="name_update" class="input_text"
+                         required="true" requiredMessage="Please fill name">
+                <f:validateLength maximum="100"/>
+            </h:inputText>
+            <h:message for="name_update"/>
+            
+            <h:outputLabel value="Age: "/>
+            <h:inputText value="#{animalForUpdate.age}" id="age_update" class="input_text">
+                <f:converter converterId="javax.faces.Integer"/>
+            </h:inputText>
+            <h:message for="age_update"/>
+            
+            <h:outputLabel value="Weight: "/>
+            <h:inputText value="#{animalForUpdate.weight}" id="weight_update" class="input_text">
+                <f:converter converterId="javax.faces.Integer"/>
+            </h:inputText>
+            <h:message for="weight_update"/>
+            
+            <h:outputLabel value="City "/>
+            <h:selectOneMenu value="#{animalForUpdate.city}" id="city_update" class="input_text">
+                <f:selectItems value="#{city.allCities()}"/>
+            </h:selectOneMenu>
+            <h:message for="city_update"/>
+            
+            <h:outputLabel value="Short Description: "/>
+            <h:inputText id ="short_update" value="#{animalForUpdate.shortDesc}" class="input_text">
+                <f:validateLength maximum="150" minimum="15" />
+            </h:inputText>
+            <h:message for="short_update"/>
+            
+            <h:outputLabel value="Free Description: "/>
+            <h:inputTextarea id="long_update" value="#{animalForUpdate.longDesc}" style="width: 90%; height:80px;"/>
+            <h:message for="long_update"/>
+            
+            <h:outputLabel value="Present different email: "/>
+            <h:inputText id="contact1_update" value="#{animalForUpdate.contact1}" class="input_text"/>
+            <h:message for="contact1_update"/>
+            
+            <h:outputLabel value="Phone 1: "/>
+            <h:inputText id="contact2_update" value="#{animalForUpdate.contact2}" class="input_text"/>
+            <h:message for="contact1_update"/>
+            
+            <h:outputLabel value="Phone2: "/>
+            <h:inputText id="contact3_update" value="#{animalForUpdate.contact3}" class="input_text"/>
+            <h:message for="contact3_update"/>
+            
+            <h:commandButton value="submit changes" action="#{animalForUpdate.update()}" 
+                              class="button"/>
+            <h:commandButton value="submit changes and move to images" 
+                             action="#{animalForUpdate.updateAndChangeImages()}" class="button"/>
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>
+

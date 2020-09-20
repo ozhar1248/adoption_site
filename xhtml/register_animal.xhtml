@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Register Pet</title>
+        <h:outputStylesheet library="css" name="global.css" />
+    </h:head>
+    <h:body>
+        <div class="header">
+            Register a pet for adoption
+        </div>
+        <h:form >
+            <h:panelGrid columns="3" cellspacing="40">
+                
+                <h:outputLabel value="Name:" for="nameInput" class="form_label"/>
+                <h:inputText value="#{animal.name}" id="nameInput" required="true" requiredMessage="Please fill name"
+                             class="input_text">
+                    <f:validateLength maximum="100"/>
+                    <f:ajax execute="nameInput" render="register"/>
+                </h:inputText>
+                <h:message for="nameInput" class="error_mess"/>
+                
+                <h:outputLabel value="Age:" for="ageInput" class="form_label"/>
+                <h:inputText value="#{animal.age}" id="ageInput" class="input_text">
+                    <f:converter converterId="javax.faces.Integer"/>
+                </h:inputText>
+                <h:message for="ageInput" class="error_mess"/>
+                
+                <h:outputLabel value="Weight:" for="weightInput" class="form_label"/>
+                <h:inputText value="#{animal.weight}" id="weightInput" class="input_text">
+                    <f:converter converterId="javax.faces.Integer"/>
+                </h:inputText>
+                <h:message for="weightInput" class="error_mess"/>
+                
+                <h:outputLabel for="categoryInput" value="Category: " class="form_label"/>
+                <h:selectOneMenu value="#{animal.category}" id="categoryInput" class="input_text">
+                    <f:selectItems value="#{category.categories}"/>
+                </h:selectOneMenu>
+                <h:message for="categoryInput" class="error_mess"/>
+                
+                <h:outputLabel for="areaInput" value="Area: " class="form_label"/>
+                <h:selectOneMenu id ="areaId" value="#{city.selectedArea}" class="input_text">
+                    <f:ajax event="valueChange" execute="areaId" render="cityInput"/>
+                    <f:selectItems  value="#{area.areas}" /> 
+                </h:selectOneMenu>
+                <h:message for="areaInput" class="error_mess"/>
+                
+                <h:outputLabel for="cityInput" value="City:" class="form_label"/>
+                <h:selectOneMenu value="#{animal.city}" id="cityInput" class="input_text">
+                    <f:selectItems  value="#{city.citiesForArea()}"/>
+                </h:selectOneMenu>
+                <h:message for="cityInput" class="error_mess"/>
+                
+                <h:outputLabel value="Enter short description (15-150 characters): " for="shortDescription"
+                               class="form_label"/>
+                <h:inputTextarea id="shortDescription" value="#{animal.shortDescription}" class="textArea">
+                    <f:validateLength maximum="150" minimum="15" />
+                </h:inputTextarea>
+                <h:message for="shortDescription" class="error_mess"/>
+                
+                <h:outputLabel value="Enter free description: " for="longDescription" class="form_label"/>
+                <h:inputTextarea id="longDescription" value="#{animal.longDescription}" class="textArea"/>
+                <h:message for="longDescription" class="error_mess"/>
+                
+                <h:outputLabel value="Choose how to communicate with you:" for="communications" class="form_label"/>
+                <h:selectManyCheckbox value="#{animal.communications}" id="communications" class="checkbox">
+                    <f:selectItems value="#{user.communications()}" />
+                </h:selectManyCheckbox>
+                <h:message for="communications" class="error_mess"/>
+            </h:panelGrid>
+                
+            <h:commandButton id="register" value="Register #{animal.name} and continue to image uploading" 
+                             action="#{animal.register()}" class="button"/>
+        </h:form>
+    </h:body>
+</html>
+

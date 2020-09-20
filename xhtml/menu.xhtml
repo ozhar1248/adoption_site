@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Menu</title>
+        <h:outputStylesheet library="css" name="global.css" />
+    </h:head>
+    <h:body>
+        <div class="header">
+            Welcome #{user.firstName}
+        </div>
+        <h:form>
+            <h:panelGrid columns="1" cellspacing="30" styleClass="grid">
+                <h:graphicImage value="\images\menu1.gif"/>
+                <h:commandLink class="home_links" value="Search Pets" action="imagesTable.xhtml"/>
+                <h:commandLink class="home_links" value="Home Page" action="index.xhtml"
+                               actionListener="#{user.reset()}"/>
+                <h:commandLink class="home_links" value="Register a pet for adoption" action="register_animal.xhtml"
+                               actionListener="#{animal.reset()}"/>
+                <h:commandLink class="home_links" value="Change pet details" action="changeDetailsAnimal.xhtml"
+                               actionListener="#{animal.reset()}"/>
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>
+

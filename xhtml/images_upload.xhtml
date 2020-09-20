@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Upload images</title>
+        <h:outputStylesheet library="css" name="global.css" />
+    </h:head>
+    <h:body>
+        
+        <div class="header">
+            Upload Images
+        </div>
+        <h:form>
+            <h:commandButton value="Back" action="menu.xhtml" class="button" />
+            <br/>
+        </h:form>
+        <h:form enctype="multipart/form-data">
+            <h:panelGrid columns="5" class="upload_images_grid" columnClasses="label, input, error, image, remove" rowClasses="row">
+                
+                <h:outputLabel value ="Profile Image: "/>
+                <h:inputFile id="ImageInput0" value="#{imagesUploadHandle.image0}" validator="#{validators.validateImage}">
+                    <f:ajax execute="ImageInput0" render="image0 error0 remove0" />
+                </h:inputFile>
+                <h:message for="ImageInput0" id="error0" class="error_mess"/>
+                <h:graphicImage id="image0" value="#{imagesUploadHandle.imageName0}" class="image_upload" />
+                <h:commandLink id="remove0" value="remove" action="#{imagesUploadHandle.remove(0)}" >
+                    <f:ajax execute="remove0" render="image0 error0 remove0" />
+                </h:commandLink>
+                
+                <h:outputLabel value ="Profile Image: "/>
+                <h:inputFile id="ImageInput1" value="#{imagesUploadHandle.image1}" validator="#{validators.validateImage}">
+                    <f:ajax execute="ImageInput1" render="image1 error1 remove1" />
+                </h:inputFile>
+                <h:message for="ImageInput1" id="error1" class="error_mess"/>
+                <h:graphicImage id="image1" value="#{imagesUploadHandle.imageName1}" class="image_upload" />
+                <h:commandLink id="remove1" value="remove" action="#{imagesUploadHandle.remove(1)}" >
+                    <f:ajax execute="remove1" render="image1 error1 remove1" />
+                </h:commandLink>
+                
+                <h:outputLabel value ="Profile Image: "/>
+                <h:inputFile id="ImageInput2" value="#{imagesUploadHandle.image2}" validator="#{validators.validateImage}">
+                    <f:ajax execute="ImageInput2" render="image2 error2 remove2" />
+                </h:inputFile>
+                <h:message for="ImageInput2" id="error2" class="error_mess"/>
+                <h:graphicImage id="image2" value="#{imagesUploadHandle.imageName2}" class="image_upload" />
+                <h:commandLink id="remove2" value="remove" action="#{imagesUploadHandle.remove(2)}" >
+                    <f:ajax execute="remove2" render="image2 error2 remove2" />
+                </h:commandLink>
+                
+                <h:outputLabel value ="Profile Image: "/>
+                <h:inputFile id="ImageInput3" value="#{imagesUploadHandle.image3}" validator="#{validators.validateImage}">
+                    <f:ajax execute="ImageInput3" render="image3 error3 remove3" />
+                </h:inputFile>
+                <h:message for="ImageInput3" id="error3" class="error_mess"/>
+                <h:graphicImage id="image3" value="#{imagesUploadHandle.imageName3}" class="image_upload" />
+                <h:commandLink id="remove3" value="remove" action="#{imagesUploadHandle.remove(3)}" >
+                    <f:ajax execute="remove3" render="image3 error3 remove3" />
+                </h:commandLink>
+                
+                <h:outputLabel value ="Profile Image: "/>
+                <h:inputFile id="ImageInput4" value="#{imagesUploadHandle.image4}" validator="#{validators.validateImage}">
+                    <f:ajax execute="ImageInput4" render="image4 error4 remove4" />
+                </h:inputFile>
+                <h:message for="ImageInput4" id="error4" class="error_mess"/>
+                <h:graphicImage id="image4" value="#{imagesUploadHandle.imageName4}" class="image_upload" />
+                <h:commandLink id="remove4" value="remove" action="#{imagesUploadHandle.remove(4)}" >
+                    <f:ajax execute="remove4" render="image4 error4 remove4" />
+                    
+                </h:commandLink>
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>
+

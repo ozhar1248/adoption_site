@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Search pets</title>
+        <h:outputStylesheet library="css" name="global.css" />
+    </h:head>
+    <h:body>
+        <div class="header">
+            Find Pets
+        </div>
+        <h:form>
+            <h:panelGrid columns="2" cellspacing="40">
+                <h:outputLabel value="Category: " class="form_label"/>
+                <h:selectOneMenu id="categoryChoose" value="#{imagesList.chosenCategory}" styleClass="input_text">
+                    <f:ajax execute="categoryChoose" render="imagesPanel"/>
+                    <f:selectItems value="#{category.categories}"/>
+                </h:selectOneMenu>
+        
+                <h:outputLabel value="Area: " class="form_label"/>
+                <h:selectOneMenu id="areaChoose" value="#{imagesList.chosenArea}" styleClass="input_text">
+                    <f:ajax execute="areaChoose" render="imagesPanel"/>
+                    <f:selectItems value="#{area.areas}"/>
+                </h:selectOneMenu>
+            </h:panelGrid>
+        
+        <h:panelGrid id="imagesPanel" columns="4" rules="all" class="grid" border="0">
+            <c:forEach var="res" items="#{imagesList.animals}">
+                <h:panelGrid columns="1" rules="none" >
+                    <h:commandLink action="#{imagesList.chooseAnimal()}">
+                        <f:param name="action" value="#{res.id}"/>
+                        <h:graphicImage value="#{res.mainImageDisplay}" width="250px" height="250px"/>
+                    </h:commandLink>
+                    <h:outputText value="#{res.name}" styleClass="pet_name"/>
+                    <h:outputText value="Age: #{res.age}"/>
+                    <h:outputText value="#{res.city}" />
+                    <h:outputText value="#{res.shortDescription}"/>
+                </h:panelGrid>
+            </c:forEach>
+        </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>
+

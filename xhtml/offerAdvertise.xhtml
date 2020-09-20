@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title></title>
+        <h:outputStylesheet library="css" name="global.css" />
+    </h:head>
+    <h:body>
+        <f:event type="preRenderView" listener="#{offerShow.loadAnimalFromDB}"/>
+        
+        <div class="pageOffer">
+            
+        <div class="headerOffer">
+            Adopt #{offerShow.name}
+        </div>
+            
+        <div class="shortDescOffer">
+            <p >
+                #{offerShow.shortDescription}
+            </p>
+        </div>
+            
+        <div class="shortDescOffer">
+            <h:form>
+            <h:commandButton value="Home Menu" action="menu.xhtml" styleClass="button" style="margin-right: 5%;"/>
+            <h:commandButton value="Back To Search" action="imagesTable.xhtml" styleClass="button" style="margin-left: 5%;"/>
+            </h:form>
+        </div>
+            
+        <div class="DetailsOffer">
+            <h:panelGrid columns="1">
+            <h:panelGrid columns="2" cellspacing="30" columnClasses="column_labels , column_details ">
+                <h:outputLabel value="Category: " class="form_label"/>
+                <h:outputText value="#{offerShow.category}" class="details"/>
+                <h:outputLabel value="Age: " class="form_label"/>
+                <h:outputText value="#{offerShow.age}" class="details"/>
+                <h:outputLabel value="Weight: " class="form_label"/>
+                <h:outputText value="#{offerShow.weight}" class="details"/>
+                <h:outputLabel value="City: " class="form_label"/>
+                <h:outputText value="#{offerShow.city}" class="details"/>
+                <h:outputLabel value="Date of publication: " class="form_label"/>
+                <h:outputText value="#{offerShow.date}" class="details"/>
+                <h:outputLabel value="Description: " class="form_label"/>
+                <h:outputText value="#{offerShow.longDescription}" class="details" id="details_small"/>
+            </h:panelGrid>
+            <hr/>
+            <h:dataTable value="#{offerShow.profileImageUser}" var="res">
+                    <h:column> <h:graphicImage value="#{res}" styleClass="image_user"/> </h:column>
+            </h:dataTable>
+            <h:panelGrid columns="2" cellspacing="30" columnClasses="column_labels , column_details ">
+                <h:outputLabel value="Owner: " class="form_label"/>
+                <h:outputText value="#{offerShow.firstNameUser}" class="details"/>
+                <h:outputLabel value="About me: " class="form_label"/>
+                <h:outputText value="#{offerShow.aboutMe}" class="details"/>
+            </h:panelGrid>
+            
+            <h:dataTable value="#{offerShow.contacts}" var="res">
+                <h:column> <h:outputText value="#{res}" class="details"/> </h:column>
+            </h:dataTable>
+            
+            </h:panelGrid>
+        </div>
+            
+        <div class="imagesOffer">
+            <h:panelGrid columns="1" rules="none">
+                <c:forEach items="#{offerShow.images}" var="res">
+                    <h:graphicImage value="#{res}" styleClass="image_animal"/>
+                </c:forEach>
+            </h:panelGrid>
+        </div>
+            
+        </div>
+    </h:body>
+</html>
+
